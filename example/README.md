@@ -1,6 +1,6 @@
-# tesseract_ocr_example
+# example
 
-Demonstrates how to use the tesseract_ocr plugin.
+A new Flutter project.
 
 ## Getting Started
 
@@ -14,3 +14,7 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+## Common Issues
+
+Tessearct may crash with SIG: 9. It is resolved maybe by `flutter clean` or downgrade NDK. If it reports class not found for TessBaseAPI, please add tesseract4android-release following the example.

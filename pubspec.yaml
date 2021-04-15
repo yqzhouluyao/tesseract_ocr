@@ -6,7 +6,7 @@ author: Ahmet Tok<arny@paratoner.io>
 homepage: https://github.com/arrrrny/tesseract_ocr
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
   flutter:

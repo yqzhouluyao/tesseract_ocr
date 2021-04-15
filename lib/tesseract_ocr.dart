@@ -12,7 +12,7 @@ class TesseractOcr {
   static const String TESS_DATA_PATH = 'assets/tessdata';
   static const MethodChannel _channel = const MethodChannel('tesseract_ocr');
 
-  static Future<String> extractText(String imagePath, {String language}) async {
+  static Future<String> extractText(String imagePath, {String? language}) async {
     assert(await File(imagePath).exists(), true);
     final String tessData = await _loadTessData();
     final String extractText = await _channel.invokeMethod('extractText', <String, dynamic>{
