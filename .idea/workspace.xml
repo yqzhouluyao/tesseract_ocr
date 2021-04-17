@@ -24,11 +24,10 @@
   <component name="ChangeListManager">
     <list default="true" id="18b23e96-81e8-425c-912e-350b04bb783b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/example/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/java/io/paratoner/tesseract_ocr/TesseractOcrPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/io/paratoner/tesseract_ocr/TesseractOcrPlugin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/tesseract_ocr.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/tesseract_ocr.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tesseract_ocr.iml" beforeDir="false" afterPath="$PROJECT_DIR$/tesseract_ocr.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -59,15 +58,15 @@
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\dev\git\QuanotesX\packages\tesseract_ocr\example" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\dev\git\QuanotesX\packages\tesseract_ocr\example\tesseract4android-release" />
       <recent name="C:\dev\git\QuanotesX\packages\tesseract_ocr\android\libs" />
       <recent name="C:\dev\git\QuanotesX\packages\tesseract_ocr\example" />
       <recent name="C:\dev\git\QuanotesX\packages\tesseract_ocr\example\assets" />
       <recent name="C:\dev\git\QuanotesX\packages\tesseract_ocr" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\dev\git\QuanotesX\packages\tesseract_ocr\example" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -105,30 +104,32 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="484" height="466" key="DebuggerActiveHint/1899.2160.1536.824/0.0.2560.1400@0.0.2560.1400" timestamp="1618468134902" />
-    <state x="1061" y="442" key="FileChooserDialogImpl" timestamp="1618476316683">
+    <state x="1062" y="442" key="FileChooserDialogImpl" timestamp="1618650218493">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
+    <state x="637" y="260" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1618646287944" />
     <state x="1061" y="442" key="FileChooserDialogImpl/1899.2160.1536.824/0.0.2560.1400@0.0.2560.1400" timestamp="1618476316683" />
-    <state width="1258" height="400" key="GridCell.Tab.0.bottom" timestamp="1618496889780">
+    <state x="1062" y="442" key="FileChooserDialogImpl/2279.2592.1536.824/0.0.2560.1400@0.0.2560.1400" timestamp="1618650218493" />
+    <state width="1258" height="400" key="GridCell.Tab.0.bottom" timestamp="1618652604471">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="2517" height="401" key="GridCell.Tab.0.bottom/1899.2160.1536.824/0.0.2560.1400@0.0.2560.1400" timestamp="1618484300732" />
-    <state width="1258" height="400" key="GridCell.Tab.0.bottom/2279.2592.1536.824/0.0.2560.1400@0.0.2560.1400" timestamp="1618496889780" />
-    <state width="1258" height="400" key="GridCell.Tab.0.center" timestamp="1618496889779">
+    <state width="1258" height="400" key="GridCell.Tab.0.bottom/2279.2592.1536.824/0.0.2560.1400@0.0.2560.1400" timestamp="1618652604471" />
+    <state width="1258" height="400" key="GridCell.Tab.0.center" timestamp="1618652604471">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="2517" height="401" key="GridCell.Tab.0.center/1899.2160.1536.824/0.0.2560.1400@0.0.2560.1400" timestamp="1618484300732" />
-    <state width="1258" height="400" key="GridCell.Tab.0.center/2279.2592.1536.824/0.0.2560.1400@0.0.2560.1400" timestamp="1618496889779" />
-    <state width="1258" height="400" key="GridCell.Tab.0.left" timestamp="1618496889779">
+    <state width="1258" height="400" key="GridCell.Tab.0.center/2279.2592.1536.824/0.0.2560.1400@0.0.2560.1400" timestamp="1618652604471" />
+    <state width="1258" height="400" key="GridCell.Tab.0.left" timestamp="1618652604470">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="2517" height="401" key="GridCell.Tab.0.left/1899.2160.1536.824/0.0.2560.1400@0.0.2560.1400" timestamp="1618484300731" />
-    <state width="1258" height="400" key="GridCell.Tab.0.left/2279.2592.1536.824/0.0.2560.1400@0.0.2560.1400" timestamp="1618496889779" />
-    <state width="1258" height="400" key="GridCell.Tab.0.right" timestamp="1618496889779">
+    <state width="1258" height="400" key="GridCell.Tab.0.left/2279.2592.1536.824/0.0.2560.1400@0.0.2560.1400" timestamp="1618652604470" />
+    <state width="1258" height="400" key="GridCell.Tab.0.right" timestamp="1618652604471">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="2517" height="401" key="GridCell.Tab.0.right/1899.2160.1536.824/0.0.2560.1400@0.0.2560.1400" timestamp="1618484300732" />
-    <state width="1258" height="400" key="GridCell.Tab.0.right/2279.2592.1536.824/0.0.2560.1400@0.0.2560.1400" timestamp="1618496889779" />
+    <state width="1258" height="400" key="GridCell.Tab.0.right/2279.2592.1536.824/0.0.2560.1400@0.0.2560.1400" timestamp="1618652604471" />
     <state x="789" y="345" key="SettingsEditor" timestamp="1618497209916">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
@@ -153,22 +154,17 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/android/src/main/java/io/paratoner/tesseract_ocr/TesseractOcrPlugin.java</url>
-          <line>27</line>
-          <option name="timeStamp" value="14" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/android/src/main/java/io/paratoner/tesseract_ocr/TesseractOcrPlugin.java</url>
           <line>20</line>
           <option name="timeStamp" value="15" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/android/src/main/java/io/paratoner/tesseract_ocr/TesseractOcrPlugin.java</url>
-          <line>26</line>
+          <line>32</line>
           <option name="timeStamp" value="16" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
           <url>file://$PROJECT_DIR$/example/lib/main.dart</url>
-          <line>67</line>
+          <line>69</line>
           <option name="timeStamp" value="27" />
         </line-breakpoint>
       </breakpoints>

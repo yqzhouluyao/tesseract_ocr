@@ -51,6 +51,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   String _ocrText = '';
+  String _ocrHocr = '';
 
   Future<void> writeToFile(ByteData data, String path) {
     final buffer = data.buffer;
@@ -65,6 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
     writeToFile(bytes,'$dir/$filename');
 
     _ocrText = await TesseractOcr.extractText('$dir/$filename');
+    _ocrHocr = await TesseractOcr.extractHocr('$dir/$filename');
     setState(() {
     });
   }
@@ -101,7 +103,7 @@ class _MyHomePageState extends State<MyHomePage> {
           // center the children vertically; the main axis here is the vertical
           // axis because Columns are vertical (the cross axis would be
           // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             Text(
               'OCR result:',
@@ -109,6 +111,10 @@ class _MyHomePageState extends State<MyHomePage> {
             Text(
               '$_ocrText',
               style: Theme.of(context).textTheme.headline4,
+            ),
+            Text(
+              '$_ocrHocr',
+              style: Theme.of(context).textTheme.bodyText1,
             ),
           ],
         ),

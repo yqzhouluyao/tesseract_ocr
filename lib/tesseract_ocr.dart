@@ -23,6 +23,17 @@ class TesseractOcr {
     return extractText;
   }
 
+  static Future<String> extractHocr(String imagePath, {String? language}) async {
+    assert(await File(imagePath).exists(), true);
+    final String tessData = await _loadTessData();
+    final String extractText = await _channel.invokeMethod('extractHocr', <String, dynamic>{
+      'imagePath': imagePath,
+      'tessData': tessData,
+      'language': language,
+    });
+    return extractText;
+  }
+
   static Future<String> _loadTessData() async {
     final Directory appDirectory = await getApplicationDocumentsDirectory();
     final String tessdataDirectory = join(appDirectory.path, 'tessdata');
