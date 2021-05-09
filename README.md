@@ -10,21 +10,24 @@ This plugin uses <a href="https://github.com/adaptech-cz/Tesseract4Android/"> Te
 
 dev_dependencies:
   ...
-  flutter_tesseract_ocr: 
-    git : 
-      url: https://github.com/khjde1207/tesseract_ocr
+  flutter_tesseract_ocr:
 
 ```
 
 ## android 
 
-1. android/settings.gradle 
+1. android/build.gradle
 
-`include ':app'` -> `include ':app', ':tesseract4android-release'`
+```
+ 
+ dependencies {
+        classpath 'com.android.tools.build:gradle:3.6.2'
+        ...
+  }
 
-2. copy `./example/tesseract4android-release` -> `[project]/tesseract4android-release`
+```
 
-3. android/app/build.gradle 
+2. android/app/build.gradle 
 ```
 android {
   compileSdkVersion.....
