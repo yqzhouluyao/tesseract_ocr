@@ -29,7 +29,7 @@ Check the contents of example/assets folder and example/pubspec.yaml
 Using is very simple:
 
 ```
-
+//args android only 
 String text = await TesseractOcr.extractText('/path/to/image', language: 'kor+eng',
         args: {
           "psm": "4",
@@ -40,8 +40,8 @@ String text = await TesseractOcr.extractText('/path/to/image', language: 'kor+en
 
 You can leave `language` empty, it will default to `'eng'.
 
-```---- dynamic add Tessdata ---- ▼
-
+```
+//---- dynamic add Tessdata ---- ▼
 // https://github.com/tesseract-ocr/tessdata/raw/master/dan_frak.traineddata
 // download and read Tessdata (Uint8List)
 
@@ -51,7 +51,7 @@ d.list().forEach((traineddata) {
   print(traineddata); //current traineddata
 });
 File('${d.path}/${newTessDataFile}').writeAsBytes([Uint8List bytes]);
----- dynamic add Tessdata ---- ▲
+//---- dynamic add Tessdata ---- ▲
 
 ```
 
