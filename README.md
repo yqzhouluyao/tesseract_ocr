@@ -28,7 +28,32 @@ Check the contents of example/assets folder and example/pubspec.yaml
 
 Using is very simple:
 
-`String text = await TesseractOcr.extractText('/path/to/image', language: 'eng');`
+```
 
-You can leave `language` empty, it will default to `'eng'`.
+String text = await TesseractOcr.extractText('/path/to/image', language: 'kor+eng',
+        args: {
+          "psm": "4",
+          "preserve_interword_spaces": "1",
+        });
+
+```
+
+You can leave `language` empty, it will default to `'eng'.
+
+```---- dynamic add Tessdata ---- ▼
+
+// https://github.com/tesseract-ocr/tessdata/raw/master/dan_frak.traineddata
+// download and read Tessdata (Uint8List)
+
+String newTessDataFile = "deu.traineddata";
+Directory d = Directory(await TesseractOcr.getTessdataPath());
+d.list().forEach((traineddata) {
+  print(traineddata); //current traineddata
+});
+File('${d.path}/${newTessDataFile}').writeAsBytes([Uint8List bytes]);
+---- dynamic add Tessdata ---- ▲
+
+```
+
+
 

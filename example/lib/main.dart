@@ -60,15 +60,31 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _ocr() async {
-    final filename = 'test.png';
-    var bytes = await rootBundle.load("assets/test.png");
+    final filename = 'test1.png';
+    var bytes = await rootBundle.load("assets/test1.png");
     String dir = (await getApplicationDocumentsDirectory()).path;
-    writeToFile(bytes,'$dir/$filename');
+    writeToFile(bytes, '$dir/$filename');
 
-    _ocrText = await TesseractOcr.extractText('$dir/$filename');
-    _ocrHocr = await TesseractOcr.extractHocr('$dir/$filename');
-    setState(() {
-    });
+    // ---- dynamic add traineddata ---- ▼
+    // https://github.com/tesseract-ocr/tessdata/raw/master/dan_frak.traineddata
+    // download
+    // String newTessDataFile = "deu.traineddata";
+    // Directory d = Directory(await TesseractOcr.getTessdataPath());
+    // d.list().forEach((event) {
+    //   print(event);
+    // });
+    // File('${d.path}/${newTessDataFile}').writeAsBytes([Uint8List bytes]);
+    // ---- dynamic add traineddata ---- ▲
+
+    _ocrText = await TesseractOcr.extractText('$dir/$filename',
+        language: 'kor+eng',
+        args: {
+          "psm": "4",
+          "preserve_interword_spaces": "1",
+        });
+    print(_ocrText);
+
+    setState(() {});
   }
 
   @override
