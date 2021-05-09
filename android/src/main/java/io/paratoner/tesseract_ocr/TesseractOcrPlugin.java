@@ -3,6 +3,11 @@ package io.paratoner.tesseract_ocr;
 import com.googlecode.tesseract.android.TessBaseAPI;
 
 import java.io.File;
+
+import java.util.Map.*;
+import java.util.Map;
+
+
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
@@ -30,6 +35,7 @@ public class TesseractOcrPlugin implements MethodCallHandler {
       case "extractHocr":
         final String tessDataPath = call.argument("tessData");
         final String imagePath = call.argument("imagePath");
+        final Map<String, String> args = call.argument("args");
         String DEFAULT_LANGUAGE = "eng";
         if (call.argument("language") != null) {
           DEFAULT_LANGUAGE = call.argument("language");
@@ -37,6 +43,13 @@ public class TesseractOcrPlugin implements MethodCallHandler {
         final String[] recognizedText = new String[1];
         final TessBaseAPI baseApi = new TessBaseAPI();
         baseApi.init(tessDataPath, DEFAULT_LANGUAGE);
+        
+        if(args != null){
+          for (Map.Entry<String, String> entry : args.entrySet()) {
+            baseApi.setVariable(entry.getKey(), entry.getValue());
+          } 
+        }
+
         final File tempFile = new File(imagePath);
         baseApi.setPageSegMode(DEFAULT_PAGE_SEG_MODE);
 
