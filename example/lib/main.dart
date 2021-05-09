@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:tesseract_ocr/tesseract_ocr.dart';
+import 'package:flutter_tesseract_ocr/tesseract_ocr.dart';
 import 'package:flutter/services.dart' show ByteData, rootBundle;
 import 'dart:io';
 

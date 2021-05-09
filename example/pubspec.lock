@@ -76,6 +76,15 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_tesseract_ocr:
+    dependency: "direct dev"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: "67ca7f367bda2d882a611306a6e4c092334821ad"
+      url: "https://github.com/khjde1207/tesseract_ocr"
+    source: git
+    version: "0.3.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -198,13 +207,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.2.0"
-  tesseract_ocr:
-    dependency: "direct dev"
-    description:
-      path: ".."
-      relative: true
-    source: path
-    version: "0.3.0"
   test_api:
     dependency: transitive
     description:

@@ -4,7 +4,7 @@ import SwiftyTesseract
 
 public class SwiftTesseractOcrPlugin: NSObject, FlutterPlugin {
     public static func register(with registrar: FlutterPluginRegistrar) {
-        let channel = FlutterMethodChannel(name: "tesseract_ocr", binaryMessenger: registrar.messenger())
+        let channel = FlutterMethodChannel(name: "flutter_tesseract_ocr", binaryMessenger: registrar.messenger())
         let instance = SwiftTesseractOcrPlugin()
         registrar.addMethodCallDelegate(instance, channel: channel)
     }

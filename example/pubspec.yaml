@@ -33,8 +33,11 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter 
-  tesseract_ocr: 
-    path: ../
+  flutter_tesseract_ocr: 
+    git : 
+      url: https://github.com/khjde1207/tesseract_ocr
+  # tesseract_ocr:  
+  #   path: ../
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 

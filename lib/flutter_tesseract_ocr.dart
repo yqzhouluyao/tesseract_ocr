@@ -10,7 +10,8 @@ import 'package:path/path.dart';
 class TesseractOcr {
   static const String TESS_DATA_CONFIG = 'assets/tessdata_config.json';
   static const String TESS_DATA_PATH = 'assets/tessdata';
-  static const MethodChannel _channel = const MethodChannel('tesseract_ocr');
+  static const MethodChannel _channel =
+      const MethodChannel('flutter_tesseract_ocr');
 
   static Future<String> extractText(String imagePath,
       {String? language, Map? args}) async {

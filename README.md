@@ -4,6 +4,45 @@ Tesseract OCR 4.0 for flutter
 This plugin is based on <a href="https://github.com/tesseract-ocr/tesseract">Tesseract OCR 4</a>
 This plugin uses <a href="https://github.com/adaptech-cz/Tesseract4Android/"> Tesseract4Android </a> and <a href="https://github.com/SwiftyTesseract/SwiftyTesseract">SwiftyTesseract</a>.
 
+## install 
+
+```
+
+dev_dependencies:
+  ...
+  flutter_tesseract_ocr: 
+    git : 
+      url: https://github.com/khjde1207/tesseract_ocr
+
+```
+
+## android 
+
+1. android/settings.gradle 
+
+`include ':app'` -> `include ':app', ':tesseract4android-release'`
+
+2. copy `./example/tesseract4android-release` -> `[project]/tesseract4android-release`
+
+3. android/app/build.gradle 
+```
+android {
+  compileSdkVersion.....
+  ...
+  sourceSets {
+        ...
+  }
+  packagingOptions{
+      doNotStrip '*/mips/*.so'
+      doNotStrip '*/mips64/*.so'
+  }
+}
+```
+
+
+
+
+
 ## Getting Started
 
 You must add trained data and trained data config file to your assets directory.

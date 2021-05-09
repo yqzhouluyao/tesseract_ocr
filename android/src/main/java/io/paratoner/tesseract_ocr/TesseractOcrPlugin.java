@@ -1,4 +1,4 @@
-package io.paratoner.tesseract_ocr;
+package io.paratoner.flutter_tesseract_ocr;
 
 import com.googlecode.tesseract.android.TessBaseAPI;
 
@@ -23,7 +23,7 @@ public class TesseractOcrPlugin implements MethodCallHandler {
 
   /** Plugin registration. */
   public static void registerWith(Registrar registrar) {
-    final MethodChannel channel = new MethodChannel(registrar.messenger(), "tesseract_ocr");
+    final MethodChannel channel = new MethodChannel(registrar.messenger(), "flutter_tesseract_ocr");
     channel.setMethodCallHandler(new TesseractOcrPlugin());
   }
 
