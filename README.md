@@ -4,6 +4,8 @@ Tesseract OCR 4.0 for flutter
 This plugin is based on <a href="https://github.com/tesseract-ocr/tesseract">Tesseract OCR 4</a>
 This plugin uses <a href="https://github.com/adaptech-cz/Tesseract4Android/"> Tesseract4Android </a> and <a href="https://github.com/SwiftyTesseract/SwiftyTesseract">SwiftyTesseract</a>.
 
+[pub.dev link](https://pub.dev/packages/flutter_tesseract_ocr) 
+
 ## install 
 
 ```
