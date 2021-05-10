@@ -86,7 +86,8 @@ class MyRunnable implements Runnable {
     } else {
       recognizedText[0] = this.baseApi.getUTF8Text();
     }
-    this.baseApi.end();
+    // this.baseApi.end();
+    this.baseApi.stop();
     this.sendSuccess(recognizedText[0]);
   }
 
