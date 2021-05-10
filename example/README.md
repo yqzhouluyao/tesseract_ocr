@@ -22,7 +22,7 @@ Tessearct may crash with SIG: 9. It is resolved maybe by `flutter clean` or down
 For the following error,
 
 ```
-> Direct local .aar file dependencies are not supported when building an AAR. The resulting AAR would be broken because the classes and Android resources from any local .aar file dependencies would not be packaged in the resulting AAR. Previous versions of the Android Gradle Plugin produce broken AARs in this case too (despite not throwing this error). The following direct local .aar file dependencies of the :tesseract_ocr project caused this error: C:\dev\git\QuanotesX\packages\tesseract_ocr\android\libs\tesseract4android-release.aar
+> Direct local .aar file dependencies are not supported when building an AAR. The resulting AAR would be broken because the classes and Android resources from any local .aar file dependencies would not be packaged in the resulting AAR. Previous versions of the Android Gradle Plugin produce broken AARs in this case too (despite not throwing this error). The following direct local .aar file dependencies of the :flutter_tesseract_ocr project caused this error: C:\dev\git\QuanotesX\packages\flutter_tesseract_ocr\android\libs\tesseract4android-release.aar
 ```
 
 Add compileOnly and comment implementation, like:

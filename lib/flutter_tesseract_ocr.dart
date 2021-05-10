@@ -7,7 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 
-class TesseractOcr {
+class FlutterTesseractOcr {
   static const String TESS_DATA_CONFIG = 'assets/tessdata_config.json';
   static const String TESS_DATA_PATH = 'assets/tessdata';
   static const MethodChannel _channel =

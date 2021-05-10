@@ -74,7 +74,7 @@ Using is very simple:
 
 ```
 //args android only 
-String text = await TesseractOcr.extractText('/path/to/image', language: 'kor+eng',
+String text = await FlutterTesseractOcr.extractText('/path/to/image', language: 'kor+eng',
         args: {
           "psm": "4",
           "preserve_interword_spaces": "1",
@@ -90,7 +90,7 @@ You can leave `language` empty, it will default to `'eng'.
 // download and read Tessdata (Uint8List)
 
 String newTessDataFile = "deu.traineddata";
-Directory d = Directory(await TesseractOcr.getTessdataPath());
+Directory d = Directory(await FlutterTesseractOcr.getTessdataPath());
 d.list().forEach((traineddata) {
   print(traineddata); //current traineddata
 });

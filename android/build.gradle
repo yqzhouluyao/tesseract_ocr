@@ -1,4 +1,4 @@
-group 'io.paratoner.tesseract_ocr'
+group 'io.paratoner.flutter_tesseract_ocr'
 version '1.0'
 
 buildscript {

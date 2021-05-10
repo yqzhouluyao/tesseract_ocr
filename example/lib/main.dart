@@ -76,7 +76,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // File('${d.path}/${newTessDataFile}').writeAsBytes([Uint8List bytes]);
     // ---- dynamic add traineddata ---- ▲
 
-    _ocrText = await TesseractOcr.extractText('$dir/$filename',
+    _ocrText = await FlutterTesseractOcr.extractText('$dir/$filename',
         language: 'kor+eng',
         args: {
           "psm": "4",

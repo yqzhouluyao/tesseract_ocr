@@ -17,14 +17,14 @@ import android.os.Handler;
 import android.os.Looper;
 
 /** TesseractOcrPlugin */
-public class TesseractOcrPlugin implements MethodCallHandler {
+public class FlutterTesseractOcrPlugin implements MethodCallHandler {
 
   private static final int DEFAULT_PAGE_SEG_MODE = TessBaseAPI.PageSegMode.PSM_SINGLE_BLOCK;
 
   /** Plugin registration. */
   public static void registerWith(Registrar registrar) {
     final MethodChannel channel = new MethodChannel(registrar.messenger(), "flutter_tesseract_ocr");
-    channel.setMethodCallHandler(new TesseractOcrPlugin());
+    channel.setMethodCallHandler(new FlutterTesseractOcrPlugin());
   }
 
   @Override
@@ -55,7 +55,7 @@ public class TesseractOcrPlugin implements MethodCallHandler {
 
         Thread t = new Thread(new MyRunnable(baseApi, tempFile, recognizedText, result, call.method.equals("extractHocr")));
         t.start();
-        break;
+        break; 
 
       default:
         result.notImplemented();
