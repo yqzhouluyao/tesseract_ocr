@@ -16,7 +16,7 @@ import io.flutter.plugin.common.PluginRegistry.Registrar;
 import android.os.Handler;
 import android.os.Looper;
 
-/** TesseractOcrPlugin */
+/** FlutterTesseractOcrPlugin */
 public class FlutterTesseractOcrPlugin implements MethodCallHandler {
 
   private static final int DEFAULT_PAGE_SEG_MODE = TessBaseAPI.PageSegMode.PSM_SINGLE_BLOCK;

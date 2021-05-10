@@ -41,3 +41,7 @@
 
 * added language support you can pass the language as an optional parameter. TesseractOcr.extractText(imagePath, language: "financial");
 if not set it will default to "eng". language must match the name of .traineddata file
+
+## 0.3.4
+
+* TesseractOcr -> FlutterTesseractOcr 
