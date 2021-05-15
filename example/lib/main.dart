@@ -101,7 +101,7 @@ class _MyHomePageState extends State<MyHomePage> {
         // blacks: 100,
         // amount: 1,
         // saturation: 0,
-        gamma: 18,
+        gamma: 5,
         // exposure: 0.7,
       );
 
