@@ -24,6 +24,10 @@ dependencies:
   flutter:
     sdk: flutter
   path_provider: ^2.0.1
+  image_picker: ^0.7.2
+  exif: ^2.1.0
+  image: 
+
 
 
   # The following adds the Cupertino Icons font to your application.
