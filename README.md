@@ -6,6 +6,12 @@ This plugin uses <a href="https://github.com/adaptech-cz/Tesseract4Android/"> Te
 
 [pub.dev link](https://pub.dev/packages/flutter_tesseract_ocr) 
 
+## Finally did it!
+Even using the latest version of gradle
+
+The build is ok.
+
+
 ## install 
 
 ```
@@ -14,34 +20,6 @@ dev_dependencies:
   ...
   flutter_tesseract_ocr:
 
-```
-
-## android 
-
-1. android/build.gradle
-
-```
- 
- dependencies {
-        classpath 'com.android.tools.build:gradle:3.6.2'
-        ...
-  }
-
-```
-
-2. android/app/build.gradle 
-```
-android {
-  compileSdkVersion.....
-  ...
-  sourceSets {
-        ...
-  }
-  packagingOptions{
-      doNotStrip '*/mips/*.so'
-      doNotStrip '*/mips64/*.so'
-  }
-}
 ```
 
 

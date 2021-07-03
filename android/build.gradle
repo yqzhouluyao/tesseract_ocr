@@ -8,7 +8,8 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.6.2'
+        // classpath 'com.android.tools.build:gradle:3.6.2'
+         classpath 'com.android.tools.build:gradle:4.1.0'
     }
 }
 
@@ -16,6 +17,13 @@ rootProject.allprojects {
     repositories {
         google()
         jcenter()
+        flatDir {
+            dirs project(':flutter_tesseract_ocr').file('libs')
+        }
+    }
+    
+    dependencies {
+       
     }
 }
 
@@ -23,10 +31,12 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 28
-
+    
+     
     defaultConfig {
         minSdkVersion 16
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
     }
     lintOptions {
         disable 'InvalidPackage'
@@ -36,8 +46,12 @@ android {
         doNotStrip '*/mips64/*.so'
     }
 }
-
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
 dependencies {
-    //compileOnly files('libs/tesseract4android-release.aar')
-    implementation fileTree(include: '*.aar', dir: 'libs')
+    api(name: 'tesseract4android-release', ext: 'aar')
+    
 }
