@@ -51,7 +51,7 @@ Check the contents of example/assets folder and example/pubspec.yaml
 Using is very simple:
 
 ```
-//args android only 
+//args android only, i don't have a mac 
 String text = await FlutterTesseractOcr.extractText('/path/to/image', language: 'kor+eng',
         args: {
           "psm": "4",
