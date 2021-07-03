@@ -7,9 +7,7 @@ This plugin uses <a href="https://github.com/adaptech-cz/Tesseract4Android/"> Te
 [pub.dev link](https://pub.dev/packages/flutter_tesseract_ocr) 
 
 ## Finally did it!
-Even using the latest version of gradle
-
-The build is ok.
+Support latest gradle 
 
 
 ## install 
