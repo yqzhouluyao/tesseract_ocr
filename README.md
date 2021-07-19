@@ -26,7 +26,8 @@ dev_dependencies:
 ```
 
 ## web  
-web/index.html 
+./web/index.html 
+
 use https://www.npmjs.com/package/tesseract.js/v/2.1.1
 ```
 <body>
