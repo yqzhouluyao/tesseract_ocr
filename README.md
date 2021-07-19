@@ -6,6 +6,11 @@ This plugin uses <a href="https://github.com/adaptech-cz/Tesseract4Android/"> Te
 
 [pub.dev link](https://pub.dev/packages/flutter_tesseract_ocr) 
 
+---
+## web support 
+developing.
+
+---
 ## Finally did it!
 Support latest gradle 
 
@@ -20,6 +25,17 @@ dev_dependencies:
 
 ```
 
+## web  
+web/index.html 
+use https://www.npmjs.com/package/tesseract.js/v/2.1.1
+```
+<body>
+  <script src='https://unpkg.com/tesseract.js@v2.1.0/dist/tesseract.min.js'></script>
+  ...
+  ..
+  .
+</body>
+```
 
 
 
