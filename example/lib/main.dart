@@ -40,7 +40,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   String _ocrText = '';
   String _ocrHocr = '';
-  String path = "https://tesseract.projectnaptha.com/img/eng_bw.png";
+  String path =
+      "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FqCviW%2FbtqGWTUaYLo%2FwD3ZE6r3ARZqi4MkUbcGm0%2Fimg.png";
 
   Future<void> writeToFile(ByteData data, String path) {
     final buffer = data.buffer;
@@ -70,7 +71,6 @@ class _MyHomePageState extends State<MyHomePage> {
       _ocrText = await FlutterTesseractOcr.extractText(pickedFile.path,
           language: 'kor',
           args: {
-            "psm": "4",
             "preserve_interword_spaces": "1",
           });
       setState(() {});
@@ -97,11 +97,6 @@ class _MyHomePageState extends State<MyHomePage> {
           });
       print(_ocrHocr.split('   ').length);
       setState(() {});
-      // print(test);
-      // print('---------------------------------------------------------');
-      // }
-
-      setState(() {});
     }
   }
 
@@ -120,10 +115,15 @@ class _MyHomePageState extends State<MyHomePage> {
             // ),
             ElevatedButton(
                 onPressed: () async {
-                  print(await FlutterTesseractOcr.extractText(
-                      'https://tesseract.projectnaptha.com/img/eng_bw.png'));
+                  print(await FlutterTesseractOcr.extractText(path,
+                      language: 'kor',
+                      args: {
+                        "psm": "4",
+                        "preserve_interword_spaces": "1",
+                      }));
                 },
                 child: Text("test")),
+
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
