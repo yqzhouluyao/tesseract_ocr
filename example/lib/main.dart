@@ -121,6 +121,18 @@ class _MyHomePageState extends State<MyHomePage> {
     // });
     // print(_ocrText);
     // print(_ocrText);
+
+    // === web console test code ===
+    // var worker = Tesseract.createWorker();
+    // await worker.load();
+    // await worker.loadLanguage("eng");
+    // await worker.initialize("eng");
+    // // await worker.setParameters({ "tessjs_create_hocr": "1"});
+    // var rtn = worker.recognize("https://tesseract.projectnaptha.com/img/eng_bw.png");
+    // console.log(rtn.data);
+    // await worker.terminate();
+    // === web console test code ===
+
     bload = false;
     setState(() {});
   }
