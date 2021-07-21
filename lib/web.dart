@@ -9,11 +9,15 @@ import 'package:path_provider/path_provider.dart';
 @JS('Tesseract.createWorker')
 external dynamic createWorker();
 
+// FlutterTesseractOcr Class
 class FlutterTesseractOcr {
-  static const String TESS_DATA_CONFIG = 'assets/tessdata_config.json';
-  static const String TESS_DATA_PATH = 'assets/tessdata';
   static var worker = createWorker();
 
+  /// image to  text
+  ///```
+  /// String _ocrText = await FlutterTesseractOcr.extractText(url, language: langs, args: {
+  ///    "preserve_interword_spaces": "1",});
+  ///```
   static extractText(String imagePath, {String? language, Map? args}) async {
     await promiseToFuture(worker.load());
     await promiseToFuture(worker.loadLanguage(language));
@@ -26,33 +30,36 @@ class FlutterTesseractOcr {
     return rtn?.data?.text; //rtn?.data?.text;
   }
 
+  /// image to  html text(hocr)
+  ///```
+  /// String _ocrHocr = await FlutterTesseractOcr.extractText(url, language: langs, args: {
+  ///    "preserve_interword_spaces": "1",});
+  ///```
   static Future<String> extractHocr(String imagePath,
       {String? language, Map? args}) async {
-    return "";
+    await promiseToFuture(worker.load());
+    await promiseToFuture(worker.loadLanguage(language));
+    await promiseToFuture(worker.initialize(language));
+
+    await promiseToFuture(worker.setParameters(
+        jsify({...args!, "tessjs_create_hocr": "1"}), worker.id));
+
+    var rtn = await promiseToFuture(worker.recognize(imagePath, {}, worker.id));
+
+    return rtn?.data?.hocr;
   }
 
+  //web not support
   static Future<String> getTessdataPath() async {
     return "";
   }
 
+  //web not support
   static Future<String> _loadTessData() async {
     return "";
   }
 
+  //web not support
   static Future _copyTessDataToAppDocumentsDirectory(
-      String tessdataDirectory) async {
-    // final String config = await rootBundle.loadString(TESS_DATA_CONFIG);
-    // print(config);
-    // Map<String, dynamic> files = jsonDecode(config);
-    // for (var file in files["files"]) {
-    //   if (!await File('$tessdataDirectory/$file').exists()) {
-    //     final ByteData data = await rootBundle.load('$TESS_DATA_PATH/$file');
-    //     final Uint8List bytes = data.buffer.asUint8List(
-    //       data.offsetInBytes,
-    //       data.lengthInBytes,
-    //     );
-    //     await File('$tessdataDirectory/$file').writeAsBytes(bytes);
-    //   }
-    // }
-  }
+      String tessdataDirectory) async {}
 }

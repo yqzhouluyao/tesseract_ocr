@@ -6,11 +6,6 @@ This plugin uses <a href="https://github.com/adaptech-cz/Tesseract4Android/"> Te
 
 [pub.dev link](https://pub.dev/packages/flutter_tesseract_ocr) 
 
----
-## web support 
-developing.
-
----
 ## Finally did it!
 Support latest gradle 
 
@@ -66,7 +61,7 @@ Check the contents of example/assets folder and example/pubspec.yaml
 Using is very simple:
 
 ```
-//args android only, i don't have a mac 
+//args support android / Web , i don't have a mac 
 String text = await FlutterTesseractOcr.extractText('/path/to/image', language: 'kor+eng',
         args: {
           "psm": "4",
@@ -80,14 +75,19 @@ You can leave `language` empty, it will default to `'eng'.
 ```
 //---- dynamic add Tessdata ---- ▼
 // https://github.com/tesseract-ocr/tessdata/raw/master/dan_frak.traineddata
-// download and read Tessdata (Uint8List)
 
-String newTessDataFile = "deu.traineddata";
-Directory d = Directory(await FlutterTesseractOcr.getTessdataPath());
-d.list().forEach((traineddata) {
-  print(traineddata); //current traineddata
-});
-File('${d.path}/${newTessDataFile}').writeAsBytes([Uint8List bytes]);
+HttpClient httpClient = new HttpClient();
+
+HttpClientRequest request = await httpClient.getUrl(Uri.parse(
+        'https://github.com/tesseract-ocr/tessdata/raw/master/${langName}.traineddata'));
+
+HttpClientResponse response = await request.close();
+Uint8List bytes =await consolidateHttpClientResponseBytes(response);
+String dir = await FlutterTesseractOcr.getTessdataPath();
+
+print('$dir/${langName}.traineddata');
+File file = new File('$dir/${langName}.traineddata');
+await file.writeAsBytes(bytes);
 //---- dynamic add Tessdata ---- ▲
 
 ```

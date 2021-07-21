@@ -14,6 +14,11 @@ class FlutterTesseractOcr {
   static const MethodChannel _channel =
       const MethodChannel('flutter_tesseract_ocr');
 
+  /// image to  text
+  ///```
+  /// String _ocrText = await FlutterTesseractOcr.extractText(url, language: langs, args: {
+  ///    "preserve_interword_spaces": "1",});
+  ///```
   static Future<String> extractText(String imagePath,
       {String? language, Map? args}) async {
     assert(await File(imagePath).exists(), true);
@@ -28,6 +33,11 @@ class FlutterTesseractOcr {
     return extractText;
   }
 
+  /// image to  html text(hocr)
+  ///```
+  /// String _ocrHocr = await FlutterTesseractOcr.extractText(url, language: langs, args: {
+  ///    "preserve_interword_spaces": "1",});
+  ///```
   static Future<String> extractHocr(String imagePath,
       {String? language, Map? args}) async {
     assert(await File(imagePath).exists(), true);
@@ -42,6 +52,10 @@ class FlutterTesseractOcr {
     return extractText;
   }
 
+  /// getTessdataPath
+  ///```
+  /// print(await FlutterTesseractOcr.getTessdataPath())
+  ///```
   static Future<String> getTessdataPath() async {
     final Directory appDirectory = await getApplicationDocumentsDirectory();
     final String tessdataDirectory = join(appDirectory.path, 'tessdata');
