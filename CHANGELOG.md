@@ -1,3 +1,7 @@
+## 0.3.9
+
+* Performance improvement (0.2 seconds faster per page than before)
+
 ## 0.3.8
 
 * support web 

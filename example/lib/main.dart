@@ -79,6 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
       print("Please select language");
       return;
     }
+    path = url;
     if (kIsWeb == false &&
         (url.indexOf("http://") == 0 || url.indexOf("https://") == 0)) {
       Directory tempDir = await getTemporaryDirectory();
@@ -94,18 +95,31 @@ class _MyHomePageState extends State<MyHomePage> {
     }
     var langs = selectList.join("+");
 
-    path = url;
     bload = true;
     setState(() {});
+
     _ocrText =
         await FlutterTesseractOcr.extractText(url, language: langs, args: {
       "preserve_interword_spaces": "1",
     });
-    _ocrHocr =
-        await FlutterTesseractOcr.extractHocr(url, language: langs, args: {
-      "preserve_interword_spaces": "1",
-    });
-    print(_ocrHocr);
+    //  ========== Test performance  ==========
+    // DateTime before1 = DateTime.now();
+    // print('init : start');
+    // for (var i = 0; i < 10; i++) {
+    //   _ocrText =
+    //       await FlutterTesseractOcr.extractText(url, language: langs, args: {
+    //     "preserve_interword_spaces": "1",
+    //   });
+    // }
+    // DateTime after1 = DateTime.now();
+    // print('init : ${after1.difference(before1).inMilliseconds}');
+    //  ========== Test performance  ==========
+
+    // _ocrHocr =
+    //     await FlutterTesseractOcr.extractHocr(url, language: langs, args: {
+    //   "preserve_interword_spaces": "1",
+    // });
+    // print(_ocrText);
     // print(_ocrText);
     bload = false;
     setState(() {});

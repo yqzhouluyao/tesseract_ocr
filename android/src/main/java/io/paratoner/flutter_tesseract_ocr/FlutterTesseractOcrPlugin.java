@@ -20,7 +20,8 @@ import android.os.Looper;
 public class FlutterTesseractOcrPlugin implements MethodCallHandler {
 
   private static final int DEFAULT_PAGE_SEG_MODE = TessBaseAPI.PageSegMode.PSM_SINGLE_BLOCK;
-
+  TessBaseAPI baseApi = null;
+  String lastLanguage = "";
   /** Plugin registration. */
   public static void registerWith(Registrar registrar) {
     final MethodChannel channel = new MethodChannel(registrar.messenger(), "flutter_tesseract_ocr");
@@ -41,8 +42,11 @@ public class FlutterTesseractOcrPlugin implements MethodCallHandler {
           DEFAULT_LANGUAGE = call.argument("language");
         }
         final String[] recognizedText = new String[1];
-        final TessBaseAPI baseApi = new TessBaseAPI();
-        baseApi.init(tessDataPath, DEFAULT_LANGUAGE);
+        if(baseApi == null || !lastLanguage.equals(DEFAULT_LANGUAGE)){
+          baseApi = new TessBaseAPI();
+          baseApi.init(tessDataPath, DEFAULT_LANGUAGE);
+          lastLanguage = DEFAULT_LANGUAGE;
+        }
         
         if(args != null){
           for (Map.Entry<String, String> entry : args.entrySet()) {
@@ -60,6 +64,45 @@ public class FlutterTesseractOcrPlugin implements MethodCallHandler {
       default:
         result.notImplemented();
     }
+  }
+}
+
+class MyRunnableTest implements Runnable {
+  private TessBaseAPI baseApi;
+  private File tempFile;
+  private String[] recognizedText;
+  private Result result;
+  private boolean isHocr;
+
+  public MyRunnableTest(TessBaseAPI baseApi, File tempFile, String[] recognizedText, Result result, boolean isHocr) {
+    this.baseApi = baseApi;
+    this.tempFile = tempFile;
+    this.recognizedText = recognizedText;
+    this.result = result;
+    this.isHocr = isHocr;
+  }
+
+  @Override
+  public void run() {
+    this.baseApi.setImage(this.tempFile);
+    if (isHocr) {
+      recognizedText[0] = this.baseApi.getHOCRText(0);
+    } else {
+      recognizedText[0] = this.baseApi.getUTF8Text();
+    }
+    // this.baseApi.end();
+    // this.baseApi.stop();
+    this.sendSuccess(recognizedText[0]);
+  }
+
+  public void sendSuccess(String msg) {
+    final String str = msg;
+    final Result res = this.result;
+    new Handler(Looper.getMainLooper()).post(new Runnable() {@Override
+      public void run() {
+        res.success(str);
+      }
+    });
   }
 }
 
