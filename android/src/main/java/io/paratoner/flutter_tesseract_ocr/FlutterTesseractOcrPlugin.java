@@ -67,45 +67,6 @@ public class FlutterTesseractOcrPlugin implements MethodCallHandler {
   }
 }
 
-class MyRunnableTest implements Runnable {
-  private TessBaseAPI baseApi;
-  private File tempFile;
-  private String[] recognizedText;
-  private Result result;
-  private boolean isHocr;
-
-  public MyRunnableTest(TessBaseAPI baseApi, File tempFile, String[] recognizedText, Result result, boolean isHocr) {
-    this.baseApi = baseApi;
-    this.tempFile = tempFile;
-    this.recognizedText = recognizedText;
-    this.result = result;
-    this.isHocr = isHocr;
-  }
-
-  @Override
-  public void run() {
-    this.baseApi.setImage(this.tempFile);
-    if (isHocr) {
-      recognizedText[0] = this.baseApi.getHOCRText(0);
-    } else {
-      recognizedText[0] = this.baseApi.getUTF8Text();
-    }
-    // this.baseApi.end();
-    // this.baseApi.stop();
-    this.sendSuccess(recognizedText[0]);
-  }
-
-  public void sendSuccess(String msg) {
-    final String str = msg;
-    final Result res = this.result;
-    new Handler(Looper.getMainLooper()).post(new Runnable() {@Override
-      public void run() {
-        res.success(str);
-      }
-    });
-  }
-}
-
 class MyRunnable implements Runnable {
   private TessBaseAPI baseApi;
   private File tempFile;
