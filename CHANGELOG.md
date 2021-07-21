@@ -1,4 +1,4 @@
-## 0.3.9
+## 0.4.0
 
 * Performance improvement (0.2 seconds faster per page than before)
 
