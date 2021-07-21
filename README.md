@@ -36,7 +36,7 @@ use https://www.npmjs.com/package/tesseract.js/v/2.1.1
 
 
 
-## Getting Started
+## Getting Started (Android / Ios)
 
 You must add trained data and trained data config file to your assets directory.
 You can find additional language trained data files here <a href="https://github.com/tesseract-ocr/tessdata">Trained language files</a>
@@ -73,7 +73,7 @@ String text = await FlutterTesseractOcr.extractText('/path/to/image', language: 
 You can leave `language` empty, it will default to `'eng'.
 
 ```
-//---- dynamic add Tessdata ---- ▼
+//---- dynamic add Tessdata (Android)---- ▼ 
 // https://github.com/tesseract-ocr/tessdata/raw/master/dan_frak.traineddata
 
 HttpClient httpClient = new HttpClient();
