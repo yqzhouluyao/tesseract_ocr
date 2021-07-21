@@ -1,3 +1,11 @@
+## 0.3.8
+
+* support web 
+
+## 0.3.7
+
+* Support latest gradle 
+
 ## 0.1.0
 
 * Extract Text from images, Especially helpful when you are extracting single character images.
