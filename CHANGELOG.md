@@ -1,3 +1,7 @@
+## 0.4.2
+
+* fixes error NoSuchMethodError: The method 'containsKey' was called on null
+
 ## 0.4.0
 
 * Performance improvement (0.2 seconds faster per page than before)
@@ -9,6 +13,10 @@
 ## 0.3.7
 
 * Support latest gradle 
+
+## 0.3.4
+
+* TesseractOcr -> FlutterTesseractOcr 
 
 ## 0.1.0
 
@@ -54,6 +62,3 @@
 * added language support you can pass the language as an optional parameter. TesseractOcr.extractText(imagePath, language: "financial");
 if not set it will default to "eng". language must match the name of .traineddata file
 
-## 0.3.4
-
-* TesseractOcr -> FlutterTesseractOcr 
