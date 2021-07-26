@@ -1,5 +1,10 @@
 ## 0.4.2
 
+* working on IOS (https://github.com/khjde1207/tesseract_ocr/issues/5)
+
+
+## 0.4.2
+
 * fixes error NoSuchMethodError: The method 'containsKey' was called on null
 
 ## 0.4.0
