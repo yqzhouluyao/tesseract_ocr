@@ -84,14 +84,16 @@ class MyRunnable implements Runnable {
 
   @Override
   public void run() {
-    this.baseApi.setImage(this.tempFile);
-    if (isHocr) {
-      recognizedText[0] = this.baseApi.getHOCRText(0);
-    } else {
-      recognizedText[0] = this.baseApi.getUTF8Text();
-    }
-    // this.baseApi.end();
-    this.baseApi.stop();
+    try {
+      this.baseApi.setImage(this.tempFile);
+      if (isHocr) {
+        recognizedText[0] = this.baseApi.getHOCRText(0);
+      } else {
+        recognizedText[0] = this.baseApi.getUTF8Text();
+      }
+      this.baseApi.stop();
+      // this.baseApi.recycle();
+    } catch (Exception e) {} 
     this.sendSuccess(recognizedText[0]);
   }
 

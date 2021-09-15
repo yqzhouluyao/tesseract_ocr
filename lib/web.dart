@@ -1,33 +1,27 @@
 import 'dart:io';
 import 'dart:js';
+import 'dart:typed_data';
 
 import 'package:flutter/services.dart';
 import 'package:js/js.dart';
 import 'package:js/js_util.dart';
 import 'package:path_provider/path_provider.dart';
 
-@JS('Tesseract.createWorker')
-external dynamic createWorker();
+@JS('_extractText')
+external dynamic _extractText(String imagePath, dynamic args);
 
 // FlutterTesseractOcr Class
 class FlutterTesseractOcr {
-  static var worker = createWorker();
-
   /// image to  text
   ///```
   /// String _ocrText = await FlutterTesseractOcr.extractText(url, language: langs, args: {
   ///    "preserve_interword_spaces": "1",});
   ///```
   static extractText(String imagePath, {String? language, Map? args}) async {
-    await promiseToFuture(worker.load());
-    await promiseToFuture(worker.loadLanguage(language));
-    await promiseToFuture(worker.initialize(language));
-
-    await promiseToFuture(worker.setParameters(jsify(args!)));
-
-    var rtn = await promiseToFuture(worker.recognize(imagePath, {}, worker.id));
-
-    return rtn?.data?.text; //rtn?.data?.text;
+    var promiseData =
+        _extractText(imagePath, jsify({"language": language, "args": args!}));
+    var rtn = await promiseToFuture(promiseData);
+    return rtn;
   }
 
   /// image to  html text(hocr)
@@ -37,16 +31,14 @@ class FlutterTesseractOcr {
   ///```
   static Future<String> extractHocr(String imagePath,
       {String? language, Map? args}) async {
-    await promiseToFuture(worker.load());
-    await promiseToFuture(worker.loadLanguage(language));
-    await promiseToFuture(worker.initialize(language));
-
-    await promiseToFuture(worker.setParameters(
-        jsify({...args!, "tessjs_create_hocr": "1"}), worker.id));
-
-    var rtn = await promiseToFuture(worker.recognize(imagePath, {}, worker.id));
-
-    return rtn?.data?.hocr;
+    var promiseData = _extractText(
+        imagePath,
+        jsify({
+          "language": language,
+          "args": {...args!, "tessjs_create_hocr": "1"}
+        }));
+    var rtn = await promiseToFuture(promiseData);
+    return rtn;
   }
 
   //web not support

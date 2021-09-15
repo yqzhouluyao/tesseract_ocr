@@ -1,3 +1,43 @@
+## 0.4.13
+
+* rollback, remove liveocr 
+* fixes I had this problem when I called the menthod again, the first call was successful 
+* fixes Web: No Such Method Exception
+* add try-catch fixes #13
+
+## 0.4.12
+
+* fixes I had this problem when I called the menthod again, the first call was successful 
+
+## 0.4.12
+
+* fixes Web: No Such Method Exception
+
+
+## 0.4.10
+
+* fixes TessBaseAPI was not terminated using recycle()
+
+## 0.4.9
+
+* fixes web error (Error: Method not found: 'FlutterTesseractOcr.extractTextLive')
+
+## 0.4.8
+
+* add try-catch / edit readme 
+
+## 0.4.7
+
+* add try-catch fixes #13
+
+## 0.4.6
+
+* add live ocr (IOS)
+
+## 0.4.4
+
+* add gif
+
 ## 0.4.2
 
 * working on IOS (https://github.com/khjde1207/tesseract_ocr/issues/5)
@@ -22,6 +62,11 @@
 ## 0.3.4
 
 * TesseractOcr -> FlutterTesseractOcr 
+
+## 0.3.0
+
+* added language support you can pass the language as an optional parameter. TesseractOcr.extractText(imagePath, language: "financial");
+if not set it will default to "eng". language must match the name of .traineddata file
 
 ## 0.1.0
 
@@ -62,8 +107,4 @@
 
 * set target swift version to 4.2
 
-## 0.3.0
-
-* added language support you can pass the language as an optional parameter. TesseractOcr.extractText(imagePath, language: "financial");
-if not set it will default to "eng". language must match the name of .traineddata file
 
