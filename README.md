@@ -31,7 +31,22 @@ dev_dependencies:
 use https://www.npmjs.com/package/tesseract.js/v/2.1.1
 ```
 <body>
-  <script src='https://unpkg.com/tesseract.js@v2.1.0/dist/tesseract.min.js'></script>
+  <script src='https://unpkg.com/tesseract.js@2.1.0/dist/tesseract.min.js'></script>
+  <script>
+    async function _extractText(imagePath , mapData){
+      var worker = Tesseract.createWorker();
+      await worker.load();
+      await worker.loadLanguage(mapData.language)
+      await worker.initialize(mapData.language)
+      await worker.setParameters(mapData.args)
+      var rtn = await worker.recognize(imagePath, {}, worker.id);
+      await worker.terminate();
+      if(mapData.args["tessjs_create_hocr"]){
+        return rtn.data.hocr;  
+      }
+      return rtn.data.text;
+    }
+  </script>
   ...
   ..
   .
@@ -39,7 +54,7 @@ use https://www.npmjs.com/package/tesseract.js/v/2.1.1
 ```
 
 
-
+---
 
 ## Getting Started (Android / Ios)
 
@@ -60,6 +75,17 @@ add tessdata folder under assets folder, add tessdata_config.json file under ass
 Plugin assumes you have tessdata folder in your assets directory and defined in your pubspec.yaml
 
 Check the contents of example/assets folder and example/pubspec.yaml
+
+---
+## IOS issues
+
+[Initialization of SwiftyTesseract has failed](https://github.com/khjde1207/tesseract_ocr/issues/16)
+
+Just drag tessdata folder from asset to place under Runner folder in xcode add as a reference then it will work.
+
+[Reference](https://github.com/arrrrny/tesseract_ocr/issues/31)
+
+---
 
 ## Usage
 

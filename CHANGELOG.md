@@ -1,3 +1,6 @@
+## 0.4.16
+* edit readme 
+
 ## 0.4.13
 
 * rollback, remove liveocr 
