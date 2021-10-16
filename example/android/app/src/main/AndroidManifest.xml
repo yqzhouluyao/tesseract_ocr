@@ -1,10 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="net.lizhao.example">
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE " />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <application
-        android:label="example"
+    package="com.example.examplev2">
+   <application
+        android:label="examplev2"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

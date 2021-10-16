@@ -1,6 +1,6 @@
 {
-    "name": "example",
-    "short_name": "example",
+    "name": "examplev2",
+    "short_name": "examplev2",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
