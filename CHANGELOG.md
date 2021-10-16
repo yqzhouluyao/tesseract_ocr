@@ -1,3 +1,6 @@
+## 0.4.17
+* Migrating to Android embedding V2 for flutter
+
 ## 0.4.16
 * edit readme 
 
