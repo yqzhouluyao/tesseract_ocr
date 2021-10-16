@@ -231,7 +231,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                   HttpClient httpClient = new HttpClient();
                                   HttpClientRequest request =
                                       await httpClient.getUrl(Uri.parse(
-                                          'https://github.com/tesseract-ocr/tessdata/raw/master/${e}.traineddata'));
+                                          'https://github.com/tesseract-ocr/tessdata/raw/main/${e}.traineddata'));
                                   HttpClientResponse response =
                                       await request.close();
                                   Uint8List bytes =
