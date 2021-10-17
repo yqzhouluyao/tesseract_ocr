@@ -105,12 +105,12 @@ You can leave `language` empty, it will default to `'eng'.
 
 ```
 //---- dynamic add Tessdata (Android)---- ▼ 
-// https://github.com/tesseract-ocr/tessdata/raw/master/dan_frak.traineddata
+// https://github.com/tesseract-ocr/tessdata/raw/main/dan_frak.traineddata
 
 HttpClient httpClient = new HttpClient();
 
 HttpClientRequest request = await httpClient.getUrl(Uri.parse(
-        'https://github.com/tesseract-ocr/tessdata/raw/master/${langName}.traineddata'));
+        'https://github.com/tesseract-ocr/tessdata/raw/main/${langName}.traineddata'));
 
 HttpClientResponse response = await request.close();
 Uint8List bytes =await consolidateHttpClientResponseBytes(response);
