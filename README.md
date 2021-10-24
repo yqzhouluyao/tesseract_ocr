@@ -6,13 +6,22 @@ This plugin uses <a href="https://github.com/adaptech-cz/Tesseract4Android/"> Te
 
 [pub.dev link](https://pub.dev/packages/flutter_tesseract_ocr) 
 
+---
+
+https://pub.dev/packages/google_ml_kit
+
+Tesseract is slower than ml_kit.
+
+Consider whether you should use Tesseract
+
+---
+
 # example
 <p align='center'>
     <img src="https://raw.github.com/khjde1207/tesseract_ocr/master/example.gif" />
 </p>
 
-## Finally did it!
-Support latest gradle 
+
 
 
 ## install 
