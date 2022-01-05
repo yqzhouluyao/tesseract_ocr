@@ -1,3 +1,6 @@
+## 0.4.19
+* Fixing Calling multiple async calls crashing bug
+
 ## 0.4.17
 * Migrating to Android embedding V2 for flutter
 
