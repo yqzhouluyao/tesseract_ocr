@@ -72,8 +72,7 @@ public class FlutterTesseractOcrPlugin implements FlutterPlugin, MethodCallHandl
               final File tempFile = new File(imagePath);
               baseApi.setPageSegMode(DEFAULT_PAGE_SEG_MODE);
       
-              Thread t = new Thread(new MyRunnable(baseApi, tempFile, recognizedText, result, call.method.equals("extractHocr")));
-              t.start();
+              new MyRunnable(baseApi, tempFile, recognizedText, result, call.method.equals("extractHocr")).run();
               break; 
       
             default:
