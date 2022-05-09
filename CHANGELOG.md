@@ -1,3 +1,6 @@
+## 0.4.20
+* ios version up to 12.0
+
 ## 0.4.19
 * Fixing Calling multiple async calls crashing bug
 
