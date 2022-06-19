@@ -20,7 +20,7 @@ import android.os.Handler;
 import android.os.Looper;
 
 public class FlutterTesseractOcrPlugin implements FlutterPlugin, MethodCallHandler {
-  private static final int DEFAULT_PAGE_SEG_MODE = TessBaseAPI.PageSegMode.PSM_SINGLE_BLOCK;
+  private static final int DEFAULT_PAGE_SEG_MODE = TessBaseAPI.PageSegMode.PSM_AUTO_OSD;
   TessBaseAPI baseApi = null;
   String lastLanguage = "";
 
@@ -31,7 +31,7 @@ public class FlutterTesseractOcrPlugin implements FlutterPlugin, MethodCallHandl
     BinaryMessenger messenger = flutterPluginBinding.getBinaryMessenger();
     channel = new MethodChannel(messenger, "flutter_tesseract_ocr");
     channel.setMethodCallHandler(this);
-    
+
   }
 
   @Override
@@ -41,84 +41,88 @@ public class FlutterTesseractOcrPlugin implements FlutterPlugin, MethodCallHandl
     channel = null;
     this.baseApi.recycle();
     this.baseApi = null;
-   
+
   }
   @Override
-    public void onMethodCall(final MethodCall call, final Result result) {
- 
-        switch (call.method) {
-            case "extractText":
-            case "extractHocr":
-              final String tessDataPath = call.argument("tessData");
-              final String imagePath = call.argument("imagePath");
-              final Map<String, String> args = call.argument("args");
-              String DEFAULT_LANGUAGE = "eng";
-              if (call.argument("language") != null) {
-                DEFAULT_LANGUAGE = call.argument("language");
-              }
-              final String[] recognizedText = new String[1];
-              if(baseApi == null || !lastLanguage.equals(DEFAULT_LANGUAGE)){
-                baseApi = new TessBaseAPI();
-                baseApi.init(tessDataPath, DEFAULT_LANGUAGE);
-                lastLanguage = DEFAULT_LANGUAGE;
-              }
-              
-              if(args != null){
-                for (Map.Entry<String, String> entry : args.entrySet()) {
-                  baseApi.setVariable(entry.getKey(), entry.getValue());
-                } 
-              }
-      
-              final File tempFile = new File(imagePath);
-              baseApi.setPageSegMode(DEFAULT_PAGE_SEG_MODE);
-      
-              new MyRunnable(baseApi, tempFile, recognizedText, result, call.method.equals("extractHocr")).run();
-              break; 
-      
-            default:
-              result.notImplemented();
-          }
-    }
+  public void onMethodCall(final MethodCall call, final Result result) {
+    switch (call.method) {
+      case "extractText":
+      case "extractHocr":
+        final String tessDataPath = call.argument("tessData");
+        final String imagePath = call.argument("imagePath");
+        final Map<String, String> args = call.argument("args");
+        String DEFAULT_LANGUAGE = "eng";
+        if (call.argument("language") != null) {
+          DEFAULT_LANGUAGE = call.argument("language");
+        }
+        final String[] recognizedText = new String[1];
+        if(baseApi == null || !lastLanguage.equals(DEFAULT_LANGUAGE)){
+          baseApi = new TessBaseAPI();
+          baseApi.init(tessDataPath, DEFAULT_LANGUAGE);
+          lastLanguage = DEFAULT_LANGUAGE;
+        }
 
-   
-}
-class MyRunnable implements Runnable {
-    private TessBaseAPI baseApi;
-    private File tempFile;
-    private String[] recognizedText;
-    private Result result;
-    private boolean isHocr;
-  
-    public MyRunnable(TessBaseAPI baseApi, File tempFile, String[] recognizedText, Result result, boolean isHocr) {
-      this.baseApi = baseApi;
-      this.tempFile = tempFile;
-      this.recognizedText = recognizedText;
-      this.result = result;
-      this.isHocr = isHocr;
-    }
-  
-    @Override
-    public void run() {
-      try {
-        this.baseApi.setImage(this.tempFile);
-        if (isHocr) {
-          recognizedText[0] = this.baseApi.getHOCRText(0);
-        } else {
-          recognizedText[0] = this.baseApi.getUTF8Text();
+        int psm = DEFAULT_PAGE_SEG_MODE;
+        if(args != null){
+          for (Map.Entry<String, String> entry : args.entrySet()) {
+            if(!entry.getKey().equals("psm")) {
+              baseApi.setVariable(entry.getKey(), entry.getValue());
+            } else {
+              psm = Integer.parseInt(entry.getValue());
+            }
+          }
         }
-        this.baseApi.stop();
-        // this.baseApi.recycle();
-      } catch (Exception e) {} 
-      this.sendSuccess(recognizedText[0]);
-    }
-  
-    public void sendSuccess(String msg) {
-      final String str = msg;
-      final Result res = this.result;
-      new Handler(Looper.getMainLooper()).post(new Runnable() {@Override
-        public void run() {
-          res.success(str);
-        }
-      });
+
+        final File tempFile = new File(imagePath);
+        baseApi.setPageSegMode(psm);
+
+        new MyRunnable(baseApi, tempFile, recognizedText, result, call.method.equals("extractHocr")).run();
+        break;
+
+      default:
+        result.notImplemented();
     }
   }
+
+
+}
+class MyRunnable implements Runnable {
+  private TessBaseAPI baseApi;
+  private File tempFile;
+  private String[] recognizedText;
+  private Result result;
+  private boolean isHocr;
+
+  public MyRunnable(TessBaseAPI baseApi, File tempFile, String[] recognizedText, Result result, boolean isHocr) {
+    this.baseApi = baseApi;
+    this.tempFile = tempFile;
+    this.recognizedText = recognizedText;
+    this.result = result;
+    this.isHocr = isHocr;
+  }
+
+  @Override
+  public void run() {
+    try {
+      this.baseApi.setImage(this.tempFile);
+      if (isHocr) {
+        recognizedText[0] = this.baseApi.getHOCRText(0);
+      } else {
+        recognizedText[0] = this.baseApi.getUTF8Text();
+      }
+      this.baseApi.stop();
+      // this.baseApi.recycle();
+    } catch (Exception e) {}
+    this.sendSuccess(recognizedText[0]);
+  }
+
+  public void sendSuccess(String msg) {
+    final String str = msg;
+    final Result res = this.result;
+    new Handler(Looper.getMainLooper()).post(new Runnable() {@Override
+    public void run() {
+      res.success(str);
+    }
+    });
+  }
+}
