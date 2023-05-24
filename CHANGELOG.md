@@ -1,3 +1,7 @@
+## 0.4.23
+
+- Update flutter_tesseract_ocr.podspec
+
 ## 0.4.22
 
 - Build with latest version of Tesseract4Android
