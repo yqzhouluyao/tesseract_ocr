@@ -18,6 +18,8 @@ import io.flutter.plugin.common.MethodChannel.Result;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
+
 
 public class FlutterTesseractOcrPlugin implements FlutterPlugin, MethodCallHandler {
   private static final int DEFAULT_PAGE_SEG_MODE = TessBaseAPI.PageSegMode.PSM_AUTO_OSD;
@@ -43,86 +45,104 @@ public class FlutterTesseractOcrPlugin implements FlutterPlugin, MethodCallHandl
     this.baseApi = null;
 
   }
-  @Override
-  public void onMethodCall(final MethodCall call, final Result result) {
-    switch (call.method) {
-      case "extractText":
-      case "extractHocr":
-        final String tessDataPath = call.argument("tessData");
-        final String imagePath = call.argument("imagePath");
-        final Map<String, String> args = call.argument("args");
-        String DEFAULT_LANGUAGE = "eng";
-        if (call.argument("language") != null) {
-          DEFAULT_LANGUAGE = call.argument("language");
-        }
-        final String[] recognizedText = new String[1];
-        if(baseApi == null || !lastLanguage.equals(DEFAULT_LANGUAGE)){
-          baseApi = new TessBaseAPI();
-          baseApi.init(tessDataPath, DEFAULT_LANGUAGE);
-          lastLanguage = DEFAULT_LANGUAGE;
-        }
 
-        int psm = DEFAULT_PAGE_SEG_MODE;
-        if(args != null){
-          for (Map.Entry<String, String> entry : args.entrySet()) {
-            if(!entry.getKey().equals("psm")) {
-              baseApi.setVariable(entry.getKey(), entry.getValue());
-            } else {
-              psm = Integer.parseInt(entry.getValue());
-            }
-          }
-        }
+@Override
+public void onMethodCall(final MethodCall call, final Result result) {
+    Log.d("TesseractPlugin", "Entering onMethodCall method with call: " + call.method);
 
-        final File tempFile = new File(imagePath);
-        baseApi.setPageSegMode(psm);
-
-        new MyRunnable(baseApi, tempFile, recognizedText, result, call.method.equals("extractHocr")).run();
-        break;
-
-      default:
-        result.notImplemented();
+    final String tessDataPath = call.argument("tessData");
+    final String imagePath = call.argument("imagePath");
+    final Map<String, String> args = call.argument("args");
+    String DEFAULT_LANGUAGE = "eng";
+    if (call.argument("language") != null) {
+        DEFAULT_LANGUAGE = call.argument("language");
     }
-  }
+
+    Log.d("TesseractPlugin", "TessData path provided: " + tessDataPath);
+    Log.d("TesseractPlugin", "Image path provided: " + imagePath);
+
+    switch (call.method) {
+        case "extractText":
+        case "extractHocr":
+            if (baseApi == null || !lastLanguage.equals(DEFAULT_LANGUAGE)) {
+                Log.d("TesseractPlugin", "Initializing Tesseract with language: " + DEFAULT_LANGUAGE);
+                baseApi = new TessBaseAPI();
+
+                if (baseApi.init(tessDataPath, DEFAULT_LANGUAGE)) {
+                    Log.d("TesseractPlugin", "Tesseract initialized successfully");
+                } else {
+                    Log.e("TesseractPlugin", "Tesseract initialization failed");
+                    result.error("INIT_ERROR", "Tesseract initialization failed", null);
+                    return;
+                }
+
+                lastLanguage = DEFAULT_LANGUAGE;
+            }
+
+            int psm = DEFAULT_PAGE_SEG_MODE;
+            if (args != null) {
+                for (Map.Entry<String, String> entry : args.entrySet()) {
+                    if (!entry.getKey().equals("psm")) {
+                        baseApi.setVariable(entry.getKey(), entry.getValue());
+                    } else {
+                        psm = Integer.parseInt(entry.getValue());
+                    }
+                }
+            }
+
+            final File tempFile = new File(imagePath);
+            baseApi.setPageSegMode(psm);
+            new MyRunnable(baseApi, tempFile, result, call.method.equals("extractHocr")).run();
+            break;
+
+        default:
+            result.notImplemented();
+    }
+    Log.d("TesseractPlugin", "Exiting onMethodCall method");
+}
+
 
 
 }
+
 class MyRunnable implements Runnable {
-  private TessBaseAPI baseApi;
-  private File tempFile;
-  private String[] recognizedText;
-  private Result result;
-  private boolean isHocr;
+    private TessBaseAPI baseApi;
+    private File tempFile;
+    private Result result;
+    private boolean isHocr;
 
-  public MyRunnable(TessBaseAPI baseApi, File tempFile, String[] recognizedText, Result result, boolean isHocr) {
-    this.baseApi = baseApi;
-    this.tempFile = tempFile;
-    this.recognizedText = recognizedText;
-    this.result = result;
-    this.isHocr = isHocr;
-  }
-
-  @Override
-  public void run() {
-    try {
-      this.baseApi.setImage(this.tempFile);
-      if (isHocr) {
-        recognizedText[0] = this.baseApi.getHOCRText(0);
-      } else {
-        recognizedText[0] = this.baseApi.getUTF8Text();
-      }
-      this.baseApi.stop();
-      // this.baseApi.recycle();
-    } catch (Exception e) {}
-    this.sendSuccess(recognizedText[0]);
-  }
-
-  public void sendSuccess(String msg) {
-    final String str = msg;
-    final Result res = this.result;
-    new Handler(Looper.getMainLooper()).post(new Runnable() {@Override
-    public void run() {
-      res.success(str);
+    public MyRunnable(TessBaseAPI baseApi, File tempFile, Result result, boolean isHocr) {
+        this.baseApi = baseApi;
+        this.tempFile = tempFile;
+        this.result = result;
+        this.isHocr = isHocr;
     }
-    });
-  }
+
+    @Override
+    public void run() {
+        try {
+            this.baseApi.setImage(this.tempFile);
+            String recognizedText;
+            if (isHocr) {
+                recognizedText = this.baseApi.getHOCRText(0);
+            } else {
+                recognizedText = this.baseApi.getUTF8Text();
+            }
+            this.baseApi.stop();
+            sendSuccess(recognizedText);
+        } catch (Exception e) {
+            Log.e("TesseractPlugin", "Error during Tesseract processing", e);
+        }
+    }
+
+    public void sendSuccess(String msg) {
+        final String str = msg;
+        final Result res = this.result;
+        new Handler(Looper.getMainLooper()).post(new Runnable() {
+            @Override
+            public void run() {
+                res.success(str);
+            }
+        });
+    }
 }
